@@ -565,6 +565,7 @@ GameObject:
   - component: {fileID: 5816269006888519426}
   - component: {fileID: 5816269006888519425}
   - component: {fileID: 5816269006888519424}
+  - component: {fileID: 6640813761427292013}
   m_Layer: 5
   m_Name: SettingMenu
   m_TagString: Untagged
@@ -652,6 +653,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6640813761427292013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5816269006888519438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d09e12782a3404d318ff89d41e369de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5816269006904531799
 GameObject:
   m_ObjectHideFlags: 0
@@ -2508,6 +2521,7 @@ GameObject:
   - component: {fileID: 5816269008141331288}
   - component: {fileID: 5816269008141331303}
   - component: {fileID: 5816269008141331302}
+  - component: {fileID: 4827955432624302399}
   m_Layer: 5
   m_Name: SettingBnutton
   m_TagString: Untagged
@@ -2614,6 +2628,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4827955432624302399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5816269008141331300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b652f696b79c41919a9404d335371b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingButton: {fileID: 5816269008141331302}
 --- !u!1 &5816269008144984000
 GameObject:
   m_ObjectHideFlags: 0
@@ -4212,3 +4239,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startMenu: {fileID: 100004840679167843}
+  _settingButton: {fileID: 4827955432624302399}
+  _settingMenu: {fileID: 6640813761427292013}
+  OnStartMenuFadeComplete:
+    m_PersistentCalls:
+      m_Calls: []

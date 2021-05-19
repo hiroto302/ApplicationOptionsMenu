@@ -6,6 +6,8 @@ using UnityEngine;
 public class UIManager : MonoSingleton<UIManager>
 {
     [SerializeField] private StartMenu _startMenu;
+    [SerializeField] private SettingButton _settingButton;
+    [SerializeField] private SettingMenu _settingMenu;
 
     public Events.EventLoadFadeComplete OnStartMenuFadeComplete;   // StartMenuのFadeが完了時発生する event
 
@@ -31,6 +33,10 @@ public class UIManager : MonoSingleton<UIManager>
         // {
         //     _startMenu.gameObject.SetActive(false);
         // }
+        if(previousState == GameManager.GameState.PREGAME && currentState == GameManager.GameState.RUNNING)
+        {
+            SettingButtonSetActive(true);
+        }
 
         // GameManager.GameState.PREGAMEの時のみ StartMenu を表示
         // _startMenu.gameObject.SetActive(currentState == GameManager.GameState.PREGAME);
@@ -50,5 +56,22 @@ public class UIManager : MonoSingleton<UIManager>
     public void StartMenuSetActive(bool show)
     {
         _startMenu.gameObject.SetActive(show);
+    }
+
+    public void SettingButtonSetActive(bool show)
+    {
+        _settingButton.gameObject.SetActive(show);
+    }
+
+    public void SettingMenuSetActive(bool show)
+    {
+        if(!_settingMenu.gameObject.activeSelf)
+        {
+            _settingMenu.gameObject.SetActive(show);
+        }
+        else
+        {
+            _settingMenu.gameObject.SetActive(!show);
+        }
     }
 }
