@@ -1,15 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class BGMVolumeSlider : MonoBehaviour
 {
     [SerializeField] Slider slider;
-    [SerializeField] AudioSource aud;
 
-    // public Events.EventBGMValue OnBGMValueChange;
-
+    public float BGMVolume;     // 設定されてる値
 
     void Start()
     {
@@ -18,14 +14,10 @@ public class BGMVolumeSlider : MonoBehaviour
     }
     void HandleBGMSlider(float value)
     {
-        // aud = GameObject.Find("EnvironmentSound").GetComponent<AudioSource>();
-        // aud.volume = value;
-
-        // 下記の記述は SoundManagerクラスに記述するべきかも
-        // 普通に SoundManagerクラスのBGMの音量を変更するメソッドを作って変更するべきかも
-        // OnBGMValueChange.Invoke(value);     // Sliderの値（BGMの音量）が変更された時 event 発生
-
         // BGMの音量を変更するSoundManagerのメソッドを利用し、音を管理しているシステムクラスから event を発生させる
-        SoundManager.Instance.ChangeBGMVolume(value);
+        // SoundManager.Instance.ChangeBGMVolume(value);
+
+        // 上記の記述をSetting Menu で行う、そのためここで変更されてる内容を記録するのみ
+        BGMVolume = value;
     }
 }

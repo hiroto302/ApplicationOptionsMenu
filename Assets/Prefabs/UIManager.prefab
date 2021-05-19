@@ -327,7 +327,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -572,7 +572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5816269006888519439
 RectTransform:
   m_ObjectHideFlags: 0
@@ -665,7 +665,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d09e12782a3404d318ff89d41e369de1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmVolumeSlider: {fileID: 1246749137}
+  _bgmVolumeSlider: {fileID: 1246749137}
+  _saveButton: {fileID: 7791777524154807114}
 --- !u!1 &5816269006904531799
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +700,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1671,7 +1672,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0.5400009, y: -2.6179}
   m_SizeDelta: {x: 38.605934, y: -5.2358627}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1724,6 +1725,7 @@ GameObject:
   - component: {fileID: 5816269007648652796}
   - component: {fileID: 5816269007648652795}
   - component: {fileID: 5816269007648652794}
+  - component: {fileID: 7791777524154807114}
   m_Layer: 5
   m_Name: SaveButton
   m_TagString: Untagged
@@ -1829,6 +1831,22 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 5816269007648652795}
   m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7791777524154807114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5816269007648652792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e5118a069a5436f885b06da092c924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveButton: {fileID: 5816269007648652794}
+  OnSettingValueSave:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &5816269007665776695
@@ -2821,7 +2839,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3894,7 +3912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 5816269008728278588}
-  aud: {fileID: 0}
+  BGMVolume: 0
 --- !u!1 &5816269008734391852
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,4 +11,7 @@ public class Events
 
     // BGMの音量が変更された時発生する event
     [System.Serializable] public class EventBGMValue : UnityEvent<float>{};
+
+    // SettingMenu の設定ボタンが押された時発生する event
+    [System.Serializable] public class EventSaveSetting : UnityEvent{};
 }
