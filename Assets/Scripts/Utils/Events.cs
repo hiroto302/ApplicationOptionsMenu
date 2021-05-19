@@ -8,4 +8,7 @@ public class Events
 
     // 次の画面に移行する時行われるFade. StartMenu の Fade が完了した時に発生する event (In : false /Out : true, シーン名)
     [System.Serializable] public class EventLoadFadeComplete : UnityEvent<bool, string>{};
+
+    // BGMの音量が変更された時発生する event
+    [System.Serializable] public class EventBGMValue : UnityEvent<float>{};
 }

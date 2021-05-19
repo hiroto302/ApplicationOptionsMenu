@@ -2,17 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// SettingMenu を管理するクラス
 public class SettingMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] BGMVolumeSlider bgmVolumeSlider;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
