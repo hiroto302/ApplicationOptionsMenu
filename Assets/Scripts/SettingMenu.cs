@@ -38,7 +38,8 @@ public class SettingMenu : MonoBehaviour
     {
         SoundManager.Instance.ChangeBGMVolume(_bgmVolumeSlider.BGMVolume);  // BGMVolume 設定変更
         SoundManager.Instance.ChangeSEVolume(_seVolumeSlider.SEVolume);     // SEVolume 設定変更
-        UIManager.Instance.DarkmodeDisplay(_darkmodeToggle.darkmode);       // Darkmode の切り替え
+        // UIManager.Instance.DarkmodeDisplay(_darkmodeToggle.darkmode);       // Darkmode の切り替え
+        UIManager.Instance.IsDarkmode =  _darkmodeToggle.darkmode;       // Darkmode の切り替え
     }
 
     // SettingMenuの 初期化

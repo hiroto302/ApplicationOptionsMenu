@@ -24,6 +24,6 @@ public class DarkmodeToggle : MonoBehaviour
     // 初期化処理
     void InitializeSetting()
     {
-        darkmode = UIManager.Instance.Darkmode;
+        darkmode = UIManager.Instance.IsDarkmode;
     }
 }

@@ -13,7 +13,23 @@ public class UIManager : MonoSingleton<UIManager>
 
     public Events.EventLoadFadeComplete OnStartMenuFadeComplete;   // StartMenuのFadeが完了時発生する event
 
-    public bool Darkmode;  // UI を Darkmode で表示するか
+    private bool _isDarkmode = true;  // UI を Darkmode で表示するか
+    public bool IsDarkmode
+    {
+        get { return _isDarkmode; }
+        set
+        {
+            if(_isDarkmode != value)
+            {
+                _isDarkmode = value;
+                DarkmodeDisplay(_isDarkmode);
+            }
+            else
+            {
+                Debug.Log("Darkmodeは既に切り替わってるよ");
+            }
+        }
+    }
 
     void Start()
     {
@@ -83,10 +99,11 @@ public class UIManager : MonoSingleton<UIManager>
     // Darkmode を実行する処理
     public void DarkmodeDisplay(bool darkmode)
     {
+        // SaveButtonが押された時,DarkMode が切り替わってる時のみ処理を実行
         Debug.Log("Darkmode発令!");
         ChangeAllTextColor(darkmode);
-
     }
+
     // UIMangerが管理してる Text を全て取得し、色を切り替える
     // 注意 : StartMenu の Text には animation で色を制御してるので変更しても、すぐにanimationの設定値に戻る
     private void ChangeAllTextColor(bool darkmode)
@@ -97,5 +114,10 @@ public class UIManager : MonoSingleton<UIManager>
         {
             text.color = textColor;
         }
+    }
+
+    private void ChangeBackgroundColor(bool darkmode)
+    {
+        Image[] allImages = GetComponentsInChildren<Image>(true);
     }
 }
