@@ -25,5 +25,6 @@ public class DarkmodeToggle : MonoBehaviour
     void InitializeSetting()
     {
         darkmode = UIManager.Instance.IsDarkmode;
+        slider.value = darkmode ? 1 : 0 ;
     }
 }

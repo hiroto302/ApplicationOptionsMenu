@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 // システムクラス UI
 public class UIManager : MonoSingleton<UIManager>
 {
+    public enum LanguageType    // 選択できる言語の種類
+    {
+        English,
+        Japanese
+    }
     [SerializeField] private StartMenu _startMenu;
     [SerializeField] private SettingButton _settingButton;
     [SerializeField] private SettingMenu _settingMenu;
+
+    public LanguageType CurrentLanguageType = LanguageType.English;  // 現在の言語
+    public Events.EventLanguageType OnLanguageTypeChange;           // LanguageType が変更される時に発生する event
 
     public Events.EventLoadFadeComplete OnStartMenuFadeComplete;   // StartMenuのFadeが完了時発生する event
 
@@ -123,5 +130,24 @@ public class UIManager : MonoSingleton<UIManager>
                 image.color = imageColor;
             }
         }
+    }
+
+
+    // 表示する言語を切り替える処理
+    void UpdateLanguageType(LanguageType type)
+    {
+        LanguageType previousLanguageType = CurrentLanguageType;
+        CurrentLanguageType = type;
+
+        // 変更する前とLanguageType が異なる時の下記の処理を実行
+        if(OnLanguageTypeChange != null && CurrentLanguageType != previousLanguageType)
+        {
+            OnLanguageTypeChange.Invoke(CurrentLanguageType);   // event 発生
+        }
+    }
+
+    public void ChangeLanguageType(LanguageType type)
+    {
+        UpdateLanguageType(type);
     }
 }

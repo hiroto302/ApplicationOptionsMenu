@@ -16,4 +16,6 @@ public class Events
 
     // SettingMenu の設ボタンが押された時発生する event
     [System.Serializable] public class EventSaveSetting : UnityEvent{};
+    // UIManager の 表示言語 が変更する時発生する event
+    [System.Serializable] public class EventLanguageType : UnityEvent<UIManager.LanguageType>{};
 }
