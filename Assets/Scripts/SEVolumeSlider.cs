@@ -19,7 +19,14 @@ public class SEVolumeSlider : MonoBehaviour
     {
         // 変更されてる内容を記録
         SEVolume = value;
-        volumeText.text = value.ToString();
+        volumeText.text = PercentageValue(SEVolume).ToString(); // パーセンテージで表示
+    }
+
+    // 値のパーセント化
+    int PercentageValue(float value)
+    {
+        int percentageValue =  Mathf.FloorToInt(value * 100.0f);
+        return percentageValue;
     }
 
     // 初期化処理
@@ -27,6 +34,6 @@ public class SEVolumeSlider : MonoBehaviour
     {
         SEVolume = SoundManager.Instance.SettingSEVolume;
         slider.value = SEVolume;
-        volumeText.text = SEVolume.ToString();
+        volumeText.text = PercentageValue(SEVolume).ToString();
     }
 }

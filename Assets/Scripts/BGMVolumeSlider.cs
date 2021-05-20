@@ -21,13 +21,19 @@ public class BGMVolumeSlider : MonoBehaviour
         // SoundManager.Instance.ChangeBGMVolume(value);
         // 上記の記述をSetting Menu で行う、そのためここで変更されてる内容を記録するのみ
         BGMVolume = value;
-        volumeText.text = value.ToString();
+        volumeText.text = PercentageValue(BGMVolume).ToString();
     }
 
+    // 値のパーセント化
+    int PercentageValue(float value)
+    {
+        int percentageValue =  Mathf.FloorToInt(value * 100.0f);
+        return percentageValue;
+    }
     void InitializeSetting()
     {
         BGMVolume = SoundManager.Instance.SettingBGMVolume;
         slider.value = BGMVolume;
-        volumeText.text = BGMVolume.ToString();
+        volumeText.text = PercentageValue(BGMVolume).ToString();
     }
 }
