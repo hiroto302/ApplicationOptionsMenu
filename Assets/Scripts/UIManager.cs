@@ -24,10 +24,6 @@ public class UIManager : MonoSingleton<UIManager>
                 _isDarkmode = value;
                 DarkmodeDisplay(_isDarkmode);
             }
-            else
-            {
-                Debug.Log("Darkmodeは既に切り替わってるよ");
-            }
         }
     }
 
@@ -100,8 +96,8 @@ public class UIManager : MonoSingleton<UIManager>
     public void DarkmodeDisplay(bool darkmode)
     {
         // SaveButtonが押された時,DarkMode が切り替わってる時のみ処理を実行
-        Debug.Log("Darkmode発令!");
         ChangeAllTextColor(darkmode);
+        ChangeAllImageColor(darkmode);
     }
 
     // UIMangerが管理してる Text を全て取得し、色を切り替える
@@ -109,15 +105,23 @@ public class UIManager : MonoSingleton<UIManager>
     private void ChangeAllTextColor(bool darkmode)
     {
         Color textColor = darkmode ? Color.white : Color.black;     // 表示する text color
-        Text[] allText = GetComponentsInChildren<Text>(true);           // 子オジェクト全て(非アクティブ含む)の Text 取得
+        Text[] allText = GetComponentsInChildren<Text>(true);       // 子オジェクト全て(非アクティブ含む)の Text 取得
         foreach(var text in allText)
         {
             text.color = textColor;
         }
     }
 
-    private void ChangeBackgroundColor(bool darkmode)
+    private void ChangeAllImageColor(bool darkmode)
     {
+        Color imageColor = darkmode ? new Color32(0, 0, 0, 140) : new Color32(255, 255, 255, 140);
         Image[] allImages = GetComponentsInChildren<Image>(true);
+        foreach(var image in allImages)
+        {
+            if(image.gameObject.CompareTag("UIBackground"))
+            {
+                image.color = imageColor;
+            }
+        }
     }
 }
