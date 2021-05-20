@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 // システムクラス UI
 public class UIManager : MonoSingleton<UIManager>
@@ -10,6 +12,8 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private SettingMenu _settingMenu;
 
     public Events.EventLoadFadeComplete OnStartMenuFadeComplete;   // StartMenuのFadeが完了時発生する event
+
+    public bool Darkmode;  // UI を Darkmode で表示するか
 
     void Start()
     {
@@ -72,6 +76,26 @@ public class UIManager : MonoSingleton<UIManager>
         else
         {
             _settingMenu.gameObject.SetActive(!show);
+        }
+    }
+
+
+    // Darkmode を実行する処理
+    public void DarkmodeDisplay(bool darkmode)
+    {
+        Debug.Log("Darkmode発令!");
+        ChangeAllTextColor(darkmode);
+
+    }
+    // UIMangerが管理してる Text を全て取得し、色を切り替える
+    // 注意 : StartMenu の Text には animation で色を制御してるので変更しても、すぐにanimationの設定値に戻る
+    private void ChangeAllTextColor(bool darkmode)
+    {
+        Color textColor = darkmode ? Color.white : Color.black;     // 表示する text color
+        Text[] allText = GetComponentsInChildren<Text>(true);           // 子オジェクト全て(非アクティブ含む)の Text 取得
+        foreach(var text in allText)
+        {
+            text.color = textColor;
         }
     }
 }

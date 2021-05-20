@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class SettingMenu : MonoBehaviour
 {
     [SerializeField] BGMVolumeSlider _bgmVolumeSlider;  // BGM の音量を扱う
-    [SerializeField] SEVolumeSlider _seVolumeSlider;  // SE の音量を扱う
-    [SerializeField] SaveButton _saveButton;
+    [SerializeField] SEVolumeSlider _seVolumeSlider;    // SE の音量を扱う
+    [SerializeField] DarkmodeToggle _darkmodeToggle;    // Darkmode の切り替えを扱う
+    [SerializeField] SaveButton _saveButton;            // Saveを実行するボタン
 
     // 初期化する時の delegate event
     public  delegate void Initialization();
@@ -36,7 +37,8 @@ public class SettingMenu : MonoBehaviour
     void OnHandleSaveButton()
     {
         SoundManager.Instance.ChangeBGMVolume(_bgmVolumeSlider.BGMVolume);  // BGMVolume 設定変更
-        SoundManager.Instance.ChangeSEVolume(_seVolumeSlider.SEVolume);  // SEVolume 設定変更
+        SoundManager.Instance.ChangeSEVolume(_seVolumeSlider.SEVolume);     // SEVolume 設定変更
+        UIManager.Instance.DarkmodeDisplay(_darkmodeToggle.darkmode);       // Darkmode の切り替え
     }
 
     // SettingMenuの 初期化
