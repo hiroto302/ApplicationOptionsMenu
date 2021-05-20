@@ -11,6 +11,8 @@ public class SoundManager : MonoSingleton<SoundManager>
     public float SettingBGMVolume;                    // 各BGMのクラスに設定する値
     public float SettingSEVolume;                     // 各SEのクラスに設定する値
     public Events.EventBGMValue OnBGMVolumeChange;    // BGM の音量が変更された時の event
+    public Events.EventSEValue OnSEVolumeChange;      // SE の音量が変更された時の event
+
 
 
     protected override void Awake()
@@ -30,5 +32,10 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         SettingBGMVolume = volume;
         OnBGMVolumeChange.Invoke(SettingBGMVolume);   // 値が変更された時, BGM の音量を変更する event 発生
+    }
+    public void ChangeSEVolume(float volume)
+    {
+        SettingSEVolume = volume;
+        OnSEVolumeChange.Invoke(SettingSEVolume);   // 値が変更された時, SE の音量を変更する event 発生
     }
 }
