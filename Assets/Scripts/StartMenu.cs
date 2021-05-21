@@ -23,6 +23,8 @@ public class StartMenu : MonoBehaviour
         if(previousState == GameManager.GameState.PREGAME && currentState == GameManager.GameState.RUNNING)
         {
             FadeOut();
+            SoundManager.Instance.FadeInBGMVolume(SoundManager.Instance.InitialBGMVolume, 3.0f);
+            SoundManager.Instance.FadeInSEVolume(3.0f);
         }
         // PAUSED => PREGAME (Restart ボタンが押された時の処理)
         if(previousState == GameManager.GameState.PAUSED && currentState == GameManager.GameState.PREGAME)
@@ -36,12 +38,16 @@ public class StartMenu : MonoBehaviour
     {
         this.loadSceneName = "Main";
         FadeIn();
+        SoundManager.Instance.FadeOutBGMVolume(SoundManager.Instance.SettingBGMVolume, 3.0f);
+        SoundManager.Instance.FadeOutSEVolume(3.0f);
     }
 
     public void RestartGame()
     {
         this.loadSceneName = "Start";
         FadeIn();
+        SoundManager.Instance.FadeOutBGMVolume(SoundManager.Instance.SettingBGMVolume, 3.0f);
+        SoundManager.Instance.FadeOutSEVolume(3.0f);
     }
 
     // Fade処理の実行
@@ -68,6 +74,8 @@ public class StartMenu : MonoBehaviour
         if(loadSceneName == "Start")
         {
             _animator.SetBool("Fade", true);
+            SoundManager.Instance.FadeInBGMVolume(SoundManager.Instance.InitialBGMVolume, 3.0f);
+            SoundManager.Instance.FadeInSEVolume(3.0f);
         }
     }
 }

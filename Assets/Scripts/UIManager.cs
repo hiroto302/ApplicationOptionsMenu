@@ -71,12 +71,7 @@ public class UIManager : MonoSingleton<UIManager>
     // StartMenu が Fade処理を完了した時の event 処理
     void HandleStartMenuFadeComplete(bool fadeOut, string sceneName)
     {
-        OnStartMenuFadeComplete.Invoke(fadeOut, sceneName);  // GameManagerに知らせる
-
-        // if(fadeOut && sceneName == "Main")
-        // {
-        //     StartMenuSetActive(!fadeOut);   // StartMenuの表示 非表示
-        // }
+        OnStartMenuFadeComplete.Invoke(fadeOut, sceneName);  // GameManager・UIManagerに知らせる(仲介の役割)
     }
 
     public void StartMenuSetActive(bool show)
