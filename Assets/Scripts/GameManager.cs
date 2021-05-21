@@ -49,6 +49,14 @@ public class GameManager : MonoSingleton<GameManager>
         UIManager.Instance.OnStartMenuFadeComplete.AddListener(HandleStartMenuFadeComplete);
     }
 
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
+    }
+
     void UpdateState(GameState state)
     {
         GameState previousGameState = _currentGameState;  // ゲームの状態の移り変わりを把握したいため
@@ -57,10 +65,13 @@ public class GameManager : MonoSingleton<GameManager>
         switch (_currentGameState)
         {
             case GameState.PREGAME:
+                Time.timeScale = 1.0f;
                 break;
             case GameState.RUNNING:
+                Time.timeScale = 1.0f;
                 break;
             case GameState.PAUSED:
+                Time.timeScale = 0f;    // Pause simulation when in pause state
                 break;
             default:
                 break;
@@ -128,11 +139,6 @@ public class GameManager : MonoSingleton<GameManager>
     }
 
 
-    public void StartGame()
-    {
-        LoadScene("Main");
-    }
-
     // Fade処理が完了した時に行う処理
     void HandleStartMenuFadeComplete(bool fadeOut, string sceneName)
     {
@@ -141,6 +147,20 @@ public class GameManager : MonoSingleton<GameManager>
         {
             UnLoadScene(_currentSceneName); // 現在読み込んでるシーンを取り除く
             LoadScene(sceneName);           // FadeInが終わった後に次のシーンを読み込む
+        }
+    }
+    public void StartGame()
+    {
+        LoadScene("Main");
+    }
+
+    // ポーズメニューの切り替え
+    void TogglePause()
+    {
+        // Restartの状態ではPause メニューは開けない
+        if(CurrentGameState == GameState.RUNNING || CurrentGameState == GameState.PAUSED)
+        {
+            UpdateState(_currentGameState == GameState.RUNNING ? GameState.PAUSED : GameState.RUNNING);
         }
     }
 

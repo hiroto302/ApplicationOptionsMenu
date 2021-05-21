@@ -14,6 +14,7 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private StartMenu _startMenu;
     [SerializeField] private SettingButton _settingButton;
     [SerializeField] private SettingMenu _settingMenu;
+    [SerializeField] private PauseMenu _pauseMenu;
 
     public LanguageType CurrentLanguageType = LanguageType.English;  // 現在の言語
     public Events.EventLanguageType OnLanguageTypeChange;           // LanguageType が変更される時に発生する event
@@ -52,17 +53,16 @@ public class UIManager : MonoSingleton<UIManager>
     void HandleGameStateChange(GameManager.GameState currentState, GameManager.GameState previousState)
     {
         // Start Scene => Main Scene 移行して RUNNING の状態に切り替わった時
-        // if(previousState == GameManager.GameState.PREGAME && currentState == GameManager.GameState.RUNNING)
-        // {
-        //     _startMenu.gameObject.SetActive(false);
-        // }
         if(previousState == GameManager.GameState.PREGAME && currentState == GameManager.GameState.RUNNING)
         {
             SettingButtonSetActive(true);
         }
+        // RUNNING => PAUSED
+        if(previousState == GameManager.GameState.RUNNING && currentState == GameManager.GameState.PAUSED)
+        {
+        }
 
-        // GameManager.GameState.PREGAMEの時のみ StartMenu を表示
-        // _startMenu.gameObject.SetActive(currentState == GameManager.GameState.PREGAME);
+        PauseMenuSetActive(currentState == GameManager.GameState.PAUSED);
     }
 
     // StartMenu が Fade処理を完了した時の event 処理
@@ -96,6 +96,11 @@ public class UIManager : MonoSingleton<UIManager>
         {
             _settingMenu.gameObject.SetActive(!show);
         }
+    }
+
+    public void PauseMenuSetActive(bool show)
+    {
+        _pauseMenu.gameObject.SetActive(show);
     }
 
 

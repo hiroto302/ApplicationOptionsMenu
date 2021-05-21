@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f878f4929fb7549a3b830561eeb09777, type: 3}
-  m_Name: Quit
+  m_Name: QuitText
   m_EditorClassIdentifier: 
-  EnglishText: 
-  JapaneseText: 
+  EnglishText: Quit
+  JapaneseText: "\u7D42\u4E86"

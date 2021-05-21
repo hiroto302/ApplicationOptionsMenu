@@ -409,7 +409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5021737842666773400
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1703,13 +1703,14 @@ GameObject:
   - component: {fileID: 5816269007407758993}
   - component: {fileID: 5816269007407758992}
   - component: {fileID: 5816269007407759007}
+  - component: {fileID: 1540563321596615826}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5816269007407759006
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1790,6 +1791,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1540563321596615826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5816269007407759005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef9000ba0eb0343fc9a5e54a73b7168e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5816269007433309240
 GameObject:
   m_ObjectHideFlags: 0
@@ -2030,6 +2043,7 @@ GameObject:
   - component: {fileID: 5816269007501221924}
   - component: {fileID: 5816269007501221926}
   - component: {fileID: 5816269007501221925}
+  - component: {fileID: 5851516450655398537}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -2097,6 +2111,20 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Quit
+--- !u!114 &5851516450655398537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5816269007501221923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e127fa8bc2fb4e91bc26a5749c7d79b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textData: {fileID: 11400000, guid: 0040133edd86e438ba4c65eef3ac9be8, type: 2}
+  displayText: {fileID: 5816269007501221925}
 --- !u!1 &5816269007541776552
 GameObject:
   m_ObjectHideFlags: 0
@@ -4939,6 +4967,7 @@ MonoBehaviour:
   _startMenu: {fileID: 100004840679167843}
   _settingButton: {fileID: 4827955432624302399}
   _settingMenu: {fileID: 6640813761427292013}
+  _pauseMenu: {fileID: 1540563321596615826}
   CurrentLanguageType: 0
   OnLanguageTypeChange:
     m_PersistentCalls:
