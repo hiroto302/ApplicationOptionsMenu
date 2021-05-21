@@ -18,21 +18,29 @@ public class StartMenu : MonoBehaviour
 
     void HandleGameStateChange(GameManager.GameState currentState, GameManager.GameState previousState)
     {
-        if(previousState != GameManager.GameState.PREGAME && currentState == GameManager.GameState.RUNNING)
-        {
-            FadeIn();
-        }
 
         // Start Scene => Main Scene 移行して RUNNING の状態に切り替わった時
         if(previousState == GameManager.GameState.PREGAME && currentState == GameManager.GameState.RUNNING)
         {
             FadeOut();
         }
+        // PAUSED => PREGAME (Restart ボタンが押された時の処理)
+        if(previousState == GameManager.GameState.PAUSED && currentState == GameManager.GameState.PREGAME)
+        {
+            // RestartGame();
+            // Debug.Log("StartMenu RestartGame");
+        }
     }
 
     public void StartGame()
     {
         this.loadSceneName = "Main";
+        FadeIn();
+    }
+
+    public void RestartGame()
+    {
+        this.loadSceneName = "Start";
         FadeIn();
     }
 
@@ -44,18 +52,22 @@ public class StartMenu : MonoBehaviour
     public void FadeIn()
     {
         _animator.SetBool("Fade", false);
+        Debug.Log("FadeIN");
     }
 
     // FadeAnimation の完了時の event で呼ぶ method
     public void OnFadeOutComplete()
     {
-        Debug.Log("FadeOut 完了");
         onStartMenuFadeComplete.Invoke(true, loadSceneName);
     }
     public void OnFadeInComplete()
     {
-        Debug.Log("Fade In 完了");
         onStartMenuFadeComplete.Invoke(false, loadSceneName);
-    }
 
+        // Restart 時のFadeIn が完了後の処理
+        if(loadSceneName == "Start")
+        {
+            _animator.SetBool("Fade", true);
+        }
+    }
 }

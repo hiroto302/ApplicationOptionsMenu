@@ -14,7 +14,6 @@ public class GameManager : MonoSingleton<GameManager>
         PAUSED
     }
 
-
     public GameObject[] SystemPrefabs;                      // 生成する他のシステムクラス
     private List<GameObject> _instancedSystemPrefabs;       // 生成したシステムクラスを格納
     private string _currentSceneName;                       // 現在のシーン名
@@ -46,7 +45,7 @@ public class GameManager : MonoSingleton<GameManager>
         InstantiateSystemPrefabs();
         LoadScene("Start");
 
-        UIManager.Instance.OnStartMenuFadeComplete.AddListener(HandleStartMenuFadeComplete);
+        UIManager.Instance.OnStartMenuFadeComplete.AddListener(HandleStartMenuFadeComplete);  // Fade処理が完了時の処理
     }
 
     void Update()
@@ -108,6 +107,7 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
+    // シーンのアンロード完了時時に行う処理
     void OnUnloadOperationComplete(AsyncOperation ao)
     {
         // Debug.Log("_loadOperations.Count : " +  _loadOperations.Count);
@@ -155,7 +155,7 @@ public class GameManager : MonoSingleton<GameManager>
     }
 
     // ポーズメニューの切り替え
-    void TogglePause()
+    public void TogglePause()
     {
         // Restartの状態ではPause メニューは開けない
         if(CurrentGameState == GameState.RUNNING || CurrentGameState == GameState.PAUSED)
@@ -165,4 +165,26 @@ public class GameManager : MonoSingleton<GameManager>
     }
 
 
+    // 最初の画面(ここでは、Start Scene)に戻って再スタート
+    public void RestartGame()
+    {
+        UpdateState(GameState.PREGAME);     // PREGAMEに戻った時の処理を各クラスに実装する
+        Debug.Log("RestartGame !!");
+    }
+
+    // implement features for quitting
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        foreach(var systemPrefab in _instancedSystemPrefabs)
+        {
+            Destroy(systemPrefab);
+        }
+        _instancedSystemPrefabs.Clear();
+    }
 }

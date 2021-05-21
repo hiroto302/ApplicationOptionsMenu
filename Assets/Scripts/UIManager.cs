@@ -57,11 +57,14 @@ public class UIManager : MonoSingleton<UIManager>
         {
             SettingButtonSetActive(true);
         }
-        // RUNNING => PAUSED
-        if(previousState == GameManager.GameState.RUNNING && currentState == GameManager.GameState.PAUSED)
+        // PAUSED => PREGAME   (Restartボタンが押された時)
+        if(previousState == GameManager.GameState.PAUSED && currentState == GameManager.GameState.PREGAME)
         {
+            SettingButtonSetActive(false);
+            // StartMenuSetActive(true);
+            _startMenu.RestartGame();
         }
-
+        // ポーズメニューの表示・非表示
         PauseMenuSetActive(currentState == GameManager.GameState.PAUSED);
     }
 
@@ -70,10 +73,10 @@ public class UIManager : MonoSingleton<UIManager>
     {
         OnStartMenuFadeComplete.Invoke(fadeOut, sceneName);  // GameManagerに知らせる
 
-        if(fadeOut)
-        {
-            StartMenuSetActive(!fadeOut);   // StartMenuの表示 非表示
-        }
+        // if(fadeOut && sceneName == "Main")
+        // {
+        //     StartMenuSetActive(!fadeOut);   // StartMenuの表示 非表示
+        // }
     }
 
     public void StartMenuSetActive(bool show)
@@ -86,6 +89,14 @@ public class UIManager : MonoSingleton<UIManager>
         _settingButton.gameObject.SetActive(show);
     }
 
+
+    public void PauseMenuSetActive(bool show)
+    {
+        _pauseMenu.gameObject.SetActive(show);
+    }
+
+    // ここのメソッドだけSettingMenuに対応した書きかたになってるからあかん
+    // SettingMenuButtonの方の記述を変えて上記２つと同じ記述でも動作するように変更する
     public void SettingMenuSetActive(bool show)
     {
         if(!_settingMenu.gameObject.activeSelf)
@@ -96,11 +107,6 @@ public class UIManager : MonoSingleton<UIManager>
         {
             _settingMenu.gameObject.SetActive(!show);
         }
-    }
-
-    public void PauseMenuSetActive(bool show)
-    {
-        _pauseMenu.gameObject.SetActive(show);
     }
 
 
