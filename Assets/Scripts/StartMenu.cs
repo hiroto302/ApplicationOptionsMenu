@@ -76,6 +76,7 @@ public class StartMenu : MonoBehaviour
             _animator.SetBool("Fade", true);
             SoundManager.Instance.FadeInBGMVolume(SoundManager.Instance.InitialBGMVolume, 3.0f);
             SoundManager.Instance.FadeInSEVolume(3.0f);
+            SkyBoxManager.Instance.ChangeEveningSky();
         }
     }
 }
