@@ -128,6 +128,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 600110911, guid: 3eeb35585c3e744908848e25e98f7fd0, type: 3}
+      propertyPath: SystemPrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 600110911, guid: 3eeb35585c3e744908848e25e98f7fd0, type: 3}
+      propertyPath: SystemPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 3667234690733006, guid: 6244b03ea20044b5687ccc27cbb247ca,
+        type: 3}
     - target: {fileID: 3851282884745700044, guid: 3eeb35585c3e744908848e25e98f7fd0,
         type: 3}
       propertyPath: m_RootOrder
