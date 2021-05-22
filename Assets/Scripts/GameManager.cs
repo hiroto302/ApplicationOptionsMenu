@@ -21,6 +21,7 @@ public class GameManager : MonoSingleton<GameManager>
     private List<AsyncOperation> _loadOperations;           // ロード時に行う AsyncOperation を格納
     public Events.EventGamState OnGameStateChange;          // GameState が変わる時発生する event
 
+    public int LoadedManiSceneCount;                        // メインシーンをロードした回数
 
     public GameState CurrentGameState
     {
@@ -101,10 +102,14 @@ public class GameManager : MonoSingleton<GameManager>
 
             if(_loadOperations.Count == 0 && _currentSceneName == "Main")
             {
+                LoadedManiSceneCount++;
                 UpdateState(GameState.RUNNING);
                 // Unitychan を要請
-                SpawnManager.Instance.GenerateUnitychan(1);
-                SpawnManager.Instance.GenerateFairy(10);
+                if(LoadedManiSceneCount % 2 == 0)
+                {
+                    SpawnManager.Instance.GenerateUnitychan(LoadedManiSceneCount);
+                    SpawnManager.Instance.GenerateFairy(LoadedManiSceneCount);
+                }
             }
         }
     }

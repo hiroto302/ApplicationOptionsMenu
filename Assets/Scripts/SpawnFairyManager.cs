@@ -49,4 +49,15 @@ public class SpawnFairyManager : MonoBehaviour
     {
         return new Vector3(Random.Range(-5.0f, 5.0f), Random.Range(0.5f, 2.5f), Random.Range(2f, 3f));
     }
+
+    public void ReturnFairy()
+    {
+        foreach(var fairy in _fairyPool)
+        {
+            if(fairy.activeInHierarchy)
+            {
+                fairy.SetActive(false);
+            }
+        }
+    }
 }

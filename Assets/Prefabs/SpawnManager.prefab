@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnUnitychanManager: {fileID: 4684739597713163366}
+  _spawnFairyManager: {fileID: 8255110139474303313}
   OnUnitychanGenerate:
     m_PersistentCalls:
       m_Calls: []

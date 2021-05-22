@@ -41,4 +41,19 @@ public class SpawnUnitychanManager : MonoBehaviour
         GameObject unitychan = RequestUnitychan();
         unitychan.transform.position = spawnPosition;
     }
+
+    // Unitychan を戻す
+    public void ReturnUnitychan()
+    {
+        // Unitychanが出現してたら false にする
+        foreach(var unitychan in _unityChanPool)
+        {
+            if(unitychan.activeInHierarchy)
+            {
+                unitychan.SetActive(false);
+            }
+        }
+    }
+
+
 }

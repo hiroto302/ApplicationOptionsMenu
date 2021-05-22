@@ -86,5 +86,6 @@ public class StartMenu : MonoBehaviour
         SoundManager.Instance.FadeInSEVolume(3.0f);
         SkyBoxManager.Instance.ChangeEveningSky();
         UIManager.Instance.SetDummyCameraActive(false);
+        SpawnManager.Instance.RetrunGeneratedPrefab();
     }
 }

@@ -8,6 +8,7 @@ public class SpawnManager : MonoSingleton<SpawnManager>
     // [SerializeField] GameObject[] _prefabs;
 
     [SerializeField] SpawnUnitychanManager _spawnUnitychanManager;
+    [SerializeField] SpawnFairyManager _spawnFairyManager;
 
     public Events.EventGeneratePrefab OnUnitychanGenerate;
     public Events.EventGeneratePrefab OnFairyGenerate;
@@ -19,6 +20,13 @@ public class SpawnManager : MonoSingleton<SpawnManager>
     public void GenerateFairy(int amountOfPrefabs)
     {
         OnFairyGenerate.Invoke(amountOfPrefabs);
+    }
+
+    // Active 状態の prefab を 非アクティブにする
+    public void RetrunGeneratedPrefab()
+    {
+        _spawnUnitychanManager.ReturnUnitychan();
+        _spawnFairyManager.ReturnFairy();
     }
 
 
