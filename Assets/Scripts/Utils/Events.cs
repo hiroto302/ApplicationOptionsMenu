@@ -18,4 +18,6 @@ public class Events
     [System.Serializable] public class EventSaveSetting : UnityEvent{};
     // UIManager の 表示言語 が変更する時発生する event
     [System.Serializable] public class EventLanguageType : UnityEvent<UIManager.LanguageType>{};
+    // UIManager の Darkmode 設定が変更された時発生する event
+    [System.Serializable] public class EventDarkMode : UnityEvent<bool>{};
 }

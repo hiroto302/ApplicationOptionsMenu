@@ -27,7 +27,7 @@ public class UnityChan : MonoBehaviour
         SetConversationPanelActive(false);
     }
 
-    // 会話する内容が記述されてるpanel
+    // 会話する内容が記述されてる Canvas の表示・非表示
     void SetConversationPanelActive(bool show)
     {
         _unitychanCanvas.gameObject.SetActive(show);

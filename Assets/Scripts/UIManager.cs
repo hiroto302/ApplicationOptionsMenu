@@ -18,6 +18,7 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private Camera _dummyCamera;
 
     public LanguageType CurrentLanguageType = LanguageType.English;  // 現在の言語
+    public Events.EventDarkMode OnDarkmodeChange;            // Darkmode が変更される時に発生する event
     public Events.EventLanguageType OnLanguageTypeChange;           // LanguageType が変更される時に発生する event
 
     public Events.EventLoadFadeComplete OnStartMenuFadeComplete;   // StartMenuのFadeが完了時発生する event
@@ -32,6 +33,7 @@ public class UIManager : MonoSingleton<UIManager>
             {
                 _isDarkmode = value;
                 DarkmodeDisplay(_isDarkmode);
+                OnDarkmodeChange.Invoke(_isDarkmode);  // UIManger の子オブジェクト以外にもDarkmodeを適用
             }
         }
     }
@@ -84,7 +86,6 @@ public class UIManager : MonoSingleton<UIManager>
     {
         _settingButton.gameObject.SetActive(show);
     }
-
 
     public void PauseMenuSetActive(bool show)
     {
