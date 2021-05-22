@@ -97,7 +97,6 @@ public class GameManager : MonoSingleton<GameManager>
     {
         if(_loadOperations.Contains(ao))
         {
-            Debug.Log("_loadOperations.Count : " + _loadOperations.Count);
             _loadOperations.Remove(ao);
 
             if(_loadOperations.Count == 0 && _currentSceneName == "Main")

@@ -37,6 +37,5 @@ public class SE : MonoBehaviour
     void HandleVolumeChange(float volume)
     {
         audioSource.volume = volume;
-        Debug.Log("SE音量が変更されたよ");
     }
 }

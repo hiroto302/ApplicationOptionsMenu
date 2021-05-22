@@ -37,6 +37,5 @@ public class BGM : MonoBehaviour
     void HandleVolumeChange(float volume)
     {
         audioSource.volume = volume;
-        Debug.Log("音量が変更されたよ");
     }
 }
