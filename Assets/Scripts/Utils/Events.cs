@@ -20,4 +20,6 @@ public class Events
     [System.Serializable] public class EventLanguageType : UnityEvent<UIManager.LanguageType>{};
     // UIManager の Darkmode 設定が変更された時発生する event
     [System.Serializable] public class EventDarkMode : UnityEvent<bool>{};
+    // SpawnManeger に 特定のPrefab を生成すること要求した時に発生する event
+    [System.Serializable] public class EventGeneratePrefab : UnityEvent<int>{};
 }

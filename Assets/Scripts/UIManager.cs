@@ -49,7 +49,6 @@ public class UIManager : MonoSingleton<UIManager>
         if(Input.GetKeyDown(KeyCode.Space) &&  GameManager.Instance.CurrentGameState == GameManager.GameState.PREGAME)
         {
             _startMenu.StartGame();
-            // GameManager.Instance.StartGame();
         }
     }
 

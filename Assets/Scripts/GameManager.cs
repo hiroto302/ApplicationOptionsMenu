@@ -102,6 +102,8 @@ public class GameManager : MonoSingleton<GameManager>
             if(_loadOperations.Count == 0 && _currentSceneName == "Main")
             {
                 UpdateState(GameState.RUNNING);
+                // Unitychan を要請
+                SpawnManager.Instance.GenerateUnitychan(1);
             }
         }
     }

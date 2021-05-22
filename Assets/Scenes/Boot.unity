@@ -130,12 +130,17 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 600110911, guid: 3eeb35585c3e744908848e25e98f7fd0, type: 3}
       propertyPath: SystemPrefabs.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 600110911, guid: 3eeb35585c3e744908848e25e98f7fd0, type: 3}
       propertyPath: SystemPrefabs.Array.data[2]
       value: 
       objectReference: {fileID: 3667234690733006, guid: 6244b03ea20044b5687ccc27cbb247ca,
+        type: 3}
+    - target: {fileID: 600110911, guid: 3eeb35585c3e744908848e25e98f7fd0, type: 3}
+      propertyPath: SystemPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 4684739596479036204, guid: be1c7bde242564329a2fc17338e4905d,
         type: 3}
     - target: {fileID: 3851282884745700044, guid: 3eeb35585c3e744908848e25e98f7fd0,
         type: 3}
