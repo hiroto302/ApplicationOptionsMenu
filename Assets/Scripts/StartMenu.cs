@@ -54,11 +54,11 @@ public class StartMenu : MonoBehaviour
     public void FadeOut()
     {
         _animator.SetBool("Fade", true);
+        UIManager.Instance.SetDummyCameraActive(false);
     }
     public void FadeIn()
     {
         _animator.SetBool("Fade", false);
-        Debug.Log("FadeIN");
     }
 
     // FadeAnimation の完了時の event で呼ぶ method
@@ -68,15 +68,23 @@ public class StartMenu : MonoBehaviour
     }
     public void OnFadeInComplete()
     {
+        UIManager.Instance.SetDummyCameraActive(true);
         onStartMenuFadeComplete.Invoke(false, loadSceneName);
 
         // Restart 時のFadeIn が完了後の処理
         if(loadSceneName == "Start")
         {
-            _animator.SetBool("Fade", true);
-            SoundManager.Instance.FadeInBGMVolume(SoundManager.Instance.InitialBGMVolume, 3.0f);
-            SoundManager.Instance.FadeInSEVolume(3.0f);
-            SkyBoxManager.Instance.ChangeEveningSky();
+            RestartStartMenu();
         }
+    }
+
+    // Restart され再び StartScene に戻ってきた時に行う処理
+    void RestartStartMenu()
+    {
+        _animator.SetBool("Fade", true);
+        SoundManager.Instance.FadeInBGMVolume(SoundManager.Instance.InitialBGMVolume, 3.0f);
+        SoundManager.Instance.FadeInSEVolume(3.0f);
+        SkyBoxManager.Instance.ChangeEveningSky();
+        UIManager.Instance.SetDummyCameraActive(false);
     }
 }

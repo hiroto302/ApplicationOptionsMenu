@@ -1086,7 +1086,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5816269006866033608}
   - component: {fileID: 5816269006866033610}
-  - component: {fileID: 5816269006866033609}
   m_Layer: 0
   m_Name: Dummyamera
   m_TagString: Untagged
@@ -1117,8 +1116,8 @@ Camera:
   m_GameObject: {fileID: 5816269006866033623}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1151,14 +1150,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &5816269006866033609
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5816269006866033623}
-  m_Enabled: 1
 --- !u!1 &5816269006881436508
 GameObject:
   m_ObjectHideFlags: 0
@@ -4971,6 +4962,7 @@ MonoBehaviour:
   _settingButton: {fileID: 4827955432624302399}
   _settingMenu: {fileID: 6640813761427292013}
   _pauseMenu: {fileID: 1540563321596615826}
+  _dummyCamera: {fileID: 5816269006866033610}
   CurrentLanguageType: 0
   OnLanguageTypeChange:
     m_PersistentCalls:

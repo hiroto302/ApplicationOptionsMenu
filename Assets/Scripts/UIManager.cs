@@ -15,6 +15,7 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private SettingButton _settingButton;
     [SerializeField] private SettingMenu _settingMenu;
     [SerializeField] private PauseMenu _pauseMenu;
+    [SerializeField] private Camera _dummyCamera;
 
     public LanguageType CurrentLanguageType = LanguageType.English;  // 現在の言語
     public Events.EventLanguageType OnLanguageTypeChange;           // LanguageType が変更される時に発生する event
@@ -155,5 +156,11 @@ public class UIManager : MonoSingleton<UIManager>
     public void ChangeLanguageType(LanguageType type)
     {
         UpdateLanguageType(type);
+    }
+
+    // DummyCamera の表示・非表示
+    public void SetDummyCameraActive(bool active)
+    {
+        _dummyCamera.gameObject.SetActive(active);
     }
 }
