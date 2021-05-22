@@ -104,6 +104,7 @@ public class GameManager : MonoSingleton<GameManager>
                 UpdateState(GameState.RUNNING);
                 // Unitychan を要請
                 SpawnManager.Instance.GenerateUnitychan(1);
+                SpawnManager.Instance.GenerateFairy(10);
             }
         }
     }

@@ -19,8 +19,8 @@ public class SpawnUnitychanManager : MonoBehaviour
     // event が発生した時の処理
     void HandleUnitychanGenerate(int amountOfPrefabs)
     {
-        Debug.Log("event発生したよ！");
-        AppearUnitychan(new Vector3(0, 0, 0));
+        // SpawnUnitychan(new Vector3(-0.28f, 0, -0.471f));
+        SpawnUnitychan(new Vector3(-0.28f, 0, 0));
     }
 
 
@@ -36,9 +36,9 @@ public class SpawnUnitychanManager : MonoBehaviour
     }
 
     // Unitychan の出現
-    public void AppearUnitychan(Vector3 appearPosition)
+    public void SpawnUnitychan(Vector3 spawnPosition)
     {
         GameObject unitychan = RequestUnitychan();
-        unitychan.transform.position = appearPosition;
+        unitychan.transform.position = spawnPosition;
     }
 }

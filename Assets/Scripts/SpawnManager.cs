@@ -9,17 +9,16 @@ public class SpawnManager : MonoSingleton<SpawnManager>
 
     [SerializeField] SpawnUnitychanManager _spawnUnitychanManager;
 
-    public Events.EventGeneratePrefab OnPrefabGenerate;
     public Events.EventGeneratePrefab OnUnitychanGenerate;
-
-    [SerializeField] GameObject _fairyPrefab;
-    [SerializeField] GameObject _fairyContainer;
-    [SerializeField] List<GameObject> _fairyPool;
-
+    public Events.EventGeneratePrefab OnFairyGenerate;
 
     public void GenerateUnitychan(int amountOfPrefabs)
     {
         OnUnitychanGenerate.Invoke(amountOfPrefabs);
+    }
+    public void GenerateFairy(int amountOfPrefabs)
+    {
+        OnFairyGenerate.Invoke(amountOfPrefabs);
     }
 
 

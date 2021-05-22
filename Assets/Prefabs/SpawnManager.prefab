@@ -76,15 +76,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnUnitychanManager: {fileID: 4684739597713163366}
-  OnPrefabGenerate:
-    m_PersistentCalls:
-      m_Calls: []
   OnUnitychanGenerate:
     m_PersistentCalls:
       m_Calls: []
-  _fairyPrefab: {fileID: 0}
-  _fairyContainer: {fileID: 0}
-  _fairyPool: []
+  OnFairyGenerate:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4684739596777628016
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,6 +169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4684739598043222236}
+  - component: {fileID: 8255110139474303313}
   m_Layer: 0
   m_Name: SpawnFairyManager
   m_TagString: Untagged
@@ -194,3 +192,19 @@ Transform:
   m_Father: {fileID: 4684739596479036202}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8255110139474303313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4684739598043222237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375b204a14cfb422fbbae5dfc72c38a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fairyPrefab: {fileID: 5331546922499561712, guid: ad1aefcb5265c4996abe9e8722091649,
+    type: 3}
+  _fairyContainer: {fileID: 4684739596271746270}
+  _fairyPool: []

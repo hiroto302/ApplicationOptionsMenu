@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: UnityChanSingleWord
   m_EditorClassIdentifier: 
   EnglishText: Hey !
-  JapaneseText: "\u3084\u3063\u307B\u3044!"
+  JapaneseText: "\u3084\u3063\u307B!"
