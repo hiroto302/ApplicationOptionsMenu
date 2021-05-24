@@ -14,8 +14,6 @@ public class SettingMenuSaveData : ScriptableObject
     // Darkmodeの On or Off
     public bool IsDarkMode;
     // 言語のType
-    // public int LanguageType;
-    // enum 表現の
     public UIManager.LanguageType LanguageType;
 
     [Header("SaveData")]
@@ -25,9 +23,6 @@ public class SettingMenuSaveData : ScriptableObject
     void OnEnable()
     {
         LoadSettingMenuData();
-
-        // 保存されてるデータを他のクラスに設定する
-        // SetSaveData();
     }
 
     // アプリの終了時更新されてる Data を Save(保存)
@@ -53,8 +48,7 @@ public class SettingMenuSaveData : ScriptableObject
 
         string jsonData = JsonUtility.ToJson(this, true);  // this（このスクリプトの情報） をシリアライズ化(フォーマット化)
         PlayerPrefs.SetString(key, jsonData);              // key に JsonData を格納する
-        // PlayerPrefs.Save();                                // 最後に, これらの情報を disc に保存する
-        Debug.Log("Save Data");
+        // PlayerPrefs.Save();                             // 最後に, これらの情報を disc に保存する. アプリケーションの終了時に自動的に呼ばれるので記述しないことが推奨されてる
     }
 
     // SettingMenu の Data をロード
@@ -62,6 +56,5 @@ public class SettingMenuSaveData : ScriptableObject
     {
         // 保存されてる Data を この Data に上書きする
         JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString(key), this);
-        Debug.Log("Data Load");
     }
 }
