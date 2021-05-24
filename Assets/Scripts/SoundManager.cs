@@ -81,21 +81,26 @@ public class SoundManager : MonoSingleton<SoundManager>
         fadeSEVolumeCoroutine = StartCoroutine(FadeInSEVolumeCoroutine(initialSEVolume, second));
     }
 
-    // initialVolume を 0 にする
+    // initialVolume を 0 にする (initialVolume には 現在各オブジェクトに適用されてる音量 SettingBGMVolume が代入する)
     IEnumerator FadeOutBGMVolumeCoroutine(float initialVolume, float second)
     {
         float elapsedTime = 0;                          // 経過時間
         float fadeOutRate = initialVolume / second;     // fade率 (FadeOut: 減少率)
         float waitForSecond = 0.1f;                     // 待機時間
-        while(elapsedTime <= second)
+        while(true)
         {
+            elapsedTime += waitForSecond;                   // 経過時間の増加
+            if(elapsedTime >= second)
+            {
+                break;
+            }
+            yield return new WaitForSeconds(waitForSecond);  // 0.1秒毎に処理を繰り返す
+            Debug.Log(elapsedTime);
             // fadedVolume : フェードした後の音量
             float fadedVolume = initialVolume - fadeOutRate * elapsedTime;
             ChangeBGMVolume(fadedVolume);                    // 減少した音に設定値を変更
-            elapsedTime += waitForSecond;                    // 経過時間の増加
-            yield return new WaitForSeconds(waitForSecond);  // 0.1秒毎に処理を繰り返す
         }
-        ChangeBGMVolume(0);                 // 0 にする
+        ChangeBGMVolume(0);                          // 0 にする
         StopCoroutine(fadeBGMVolumeCoroutine);       // fade 処理終了
         fadeBGMVolumeCoroutine = null;
     }
@@ -104,17 +109,21 @@ public class SoundManager : MonoSingleton<SoundManager>
     IEnumerator FadeInBGMVolumeCoroutine(float initialVolume, float second)
     {
         float elapsedTime = 0;                          // 経過時間
-        float fadeInRate = initialVolume / second;     // fade率 (FadeIn: 増加率)
+        float fadeInRate = initialVolume / second;      // fade率 (FadeIn: 増加率)
         float waitForSecond = 0.1f;                     // 待機時間
-        while(elapsedTime <= second)
+        while(true)
         {
+            elapsedTime += waitForSecond;                    // 経過時間の増加
+            if(elapsedTime >= second)
+            {
+                break;
+            }
+            yield return new WaitForSeconds(waitForSecond);  // 0.1秒毎に処理を繰り返す
             // fadedVolume : フェードした後の音量
             float fadedVolume = 0 + fadeInRate * elapsedTime;
             ChangeBGMVolume(fadedVolume);                    // 減少した音に設定値を変更
-            elapsedTime += waitForSecond;                    // 経過時間の増加
-            yield return new WaitForSeconds(waitForSecond);  // 0.1秒毎に処理を繰り返す
         }
-        ChangeBGMVolume(initialVolume);     // 初期値の音量を戻す
+        ChangeBGMVolume(initialVolume);              // 初期値の音量を戻す
         StopCoroutine(fadeBGMVolumeCoroutine);       // fade 処理終了
         fadeBGMVolumeCoroutine = null;
     }
@@ -124,15 +133,19 @@ public class SoundManager : MonoSingleton<SoundManager>
         float elapsedTime = 0;                          // 経過時間
         float fadeOutRate = initialVolume / second;     // fade率 (FadeOut: 減少率)
         float waitForSecond = 0.1f;                     // 待機時間
-        while(elapsedTime <= second)
+        while(true)
         {
+            elapsedTime += waitForSecond;                    // 経過時間の増加
+            if(elapsedTime >= second)
+            {
+                break;
+            }
+            yield return new WaitForSeconds(waitForSecond);  // 0.1秒毎に処理を繰り返す
             // fadedVolume : フェードした後の音量
             float fadedVolume = initialVolume - fadeOutRate * elapsedTime;
             ChangeSEVolume(fadedVolume);                    // 減少した音に設定値を変更
-            elapsedTime += waitForSecond;                    // 経過時間の増加
-            yield return new WaitForSeconds(waitForSecond);  // 0.1秒毎に処理を繰り返す
         }
-        ChangeSEVolume(0);                 // 0 にする
+        ChangeSEVolume(0);                           // 0 にする
         StopCoroutine(fadeSEVolumeCoroutine);       // fade 処理終了
         fadeSEVolumeCoroutine = null;
     }
@@ -141,17 +154,22 @@ public class SoundManager : MonoSingleton<SoundManager>
     IEnumerator FadeInSEVolumeCoroutine(float initialVolume, float second)
     {
         float elapsedTime = 0;                          // 経過時間
-        float fadeInRate = initialVolume / second;     // fade率 (FadeIn: 増加率)
+        float fadeInRate = initialVolume / second;      // fade率 (FadeIn: 増加率)
         float waitForSecond = 0.1f;                     // 待機時間
-        while(elapsedTime <= second)
+        while(true)
         {
+
+            elapsedTime += waitForSecond;                    // 経過時間の増加
+            if(elapsedTime >= second)
+            {
+                break;
+            }
+            yield return new WaitForSeconds(waitForSecond);  // 0.1秒毎に処理を繰り返す
             // fadedVolume : フェードした後の音量
             float fadedVolume = 0 + fadeInRate * elapsedTime;
-            ChangeSEVolume(fadedVolume);                    // 減少した音に設定値を変更
-            elapsedTime += waitForSecond;                    // 経過時間の増加
-            yield return new WaitForSeconds(waitForSecond);  // 0.1秒毎に処理を繰り返す
+            ChangeSEVolume(fadedVolume);                     // 減少した音に設定値を変更
         }
-        ChangeSEVolume(initialVolume);     // 初期値の音量を戻す
+        ChangeSEVolume(initialVolume);              // 初期値の音量を戻す
         StopCoroutine(fadeSEVolumeCoroutine);       // fade 処理終了
         fadeSEVolumeCoroutine = null;
     }
