@@ -7,6 +7,11 @@ using UnityEngine.UI;
 // 変更したい 背景画像に関しては UIBackground に Tag を変更すること
 public class DarkmodeDisplay : MonoBehaviour
 {
+    void OnEnable()
+    {
+        ChangeDarkModeDisplay(UIManager.Instance.IsDarkmode, this.gameObject);
+    }
+
     void Start()
     {
         UIManager.Instance.OnDarkmodeChange.AddListener(HandleOnDarkmodeChange);
@@ -16,8 +21,6 @@ public class DarkmodeDisplay : MonoBehaviour
     void HandleOnDarkmodeChange(bool darkmode)
     {
         ChangeDarkModeDisplay(darkmode, this.gameObject);
-        Debug.Log("HandleOnDarkmodeChange : 呼ばれたよ");
-        Debug.Log(darkmode + " Darkmode");
     }
 
     // Darkmode を実行する処理 : 第一引数 darkモードにするか, 第二引数 Canvasを含む親クラス

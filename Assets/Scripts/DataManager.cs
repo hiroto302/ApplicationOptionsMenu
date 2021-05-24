@@ -40,13 +40,14 @@ public class DataManager : MonoSingleton<DataManager>
     // 設定されてる内容の保存
     public void SaveSettingMenuData()
     {
-        // float bgmVolume = SoundManager.Instance.SettingBGMVolume;
+        // 保存するDataの取得
         float bgmVolume = SoundManager.Instance.SettingBGMVolume;
         float seVolume = SoundManager.Instance.SettingSEVolume;
         bool isDarkmode = UIManager.Instance.IsDarkmode;
+        UIManager.LanguageType languageType = UIManager.Instance.CurrentLanguageType;
 
-
-        _settingMenuSaveData.SaveSettingMenuData(bgmVolume, seVolume, isDarkmode);
+        // Data の保存
+        _settingMenuSaveData.SaveSettingMenuData(bgmVolume, seVolume, isDarkmode, languageType);
         Debug.Log("Save");
     }
 
@@ -60,15 +61,7 @@ public class DataManager : MonoSingleton<DataManager>
             SoundManager.Instance.InitialBGMVolume = _settingMenuSaveData.BGMVolume;
             SoundManager.Instance.InitialSEVolume = _settingMenuSaveData.SEVolume;
             UIManager.Instance.IsDarkmode = _settingMenuSaveData.IsDarkMode;
-
-            // if(_settingMenuSaveData.LanguageType == 0)
-            // {
-            //     UIManager.Instance.ChangeLanguageType(UIManager.LanguageType.English);
-            // }
-            // else if(_settingMenuSaveData.LanguageType == 1)
-            // {
-            //     UIManager.Instance.ChangeLanguageType(UIManager.LanguageType.Japanese);
-            // }
+            UIManager.Instance.CurrentLanguageType = _settingMenuSaveData.LanguageType;
         }
     }
 }

@@ -40,6 +40,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     void Start()
     {
+        _startMenu.gameObject.SetActive(true);
         GameManager.Instance.OnGameStateChange.AddListener(HandleGameStateChange);
         _startMenu.onStartMenuFadeComplete.AddListener(HandleStartMenuFadeComplete);
 

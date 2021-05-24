@@ -14,9 +14,9 @@ public class SettingMenuSaveData : ScriptableObject
     // Darkmodeの On or Off
     public bool IsDarkMode;
     // 言語のType
-    public int LanguageType;
+    // public int LanguageType;
     // enum 表現の
-    public UIManager.LanguageType Type;
+    public UIManager.LanguageType LanguageType;
 
     [Header("SaveData")]
     public string key;    // Data を保存する時のキー
@@ -37,16 +37,13 @@ public class SettingMenuSaveData : ScriptableObject
     }
 
     // SettingMenu の Data を保存
-    public void SaveSettingMenuData(float BGMVolume, float SEVolume, bool IsDarkMode)
+    public void SaveSettingMenuData(float BGMVolume, float SEVolume, bool IsDarkMode, UIManager.LanguageType LanguageType)
     {
         // 保存するData内容の更新
-        // BGMVolume = SoundManager.Instance.SettingBGMVolume;
         this.BGMVolume = BGMVolume;
-        // SEVolume = SoundManager.Instance.SettingSEVolume;
         this.SEVolume = SEVolume;
-        // IsDarkMode = UIManager.Instance.IsDarkmode;
         this.IsDarkMode = IsDarkMode;
-        // Type = UIManager.Instance.CurrentLanguageType;
+        this.LanguageType = LanguageType;
 
         // キーの設定
         if(key == "")
