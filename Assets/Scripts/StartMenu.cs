@@ -9,7 +9,9 @@ public class StartMenu : MonoBehaviour
     public Events.EventLoadFadeComplete onStartMenuFadeComplete;    // Fade が完了した時の Event
 
     private string loadSceneName;  // ロード先にシーン名
-    // private string currentSceneName = "Start"; //現在のシーン名
+
+    public bool OnFadeProcessing = true;       // Fade処理している最中であるか
+
 
     void Start()
     {
@@ -59,12 +61,14 @@ public class StartMenu : MonoBehaviour
     public void FadeIn()
     {
         _animator.SetBool("Fade", false);
+        OnFadeProcessing = true;
     }
 
     // FadeAnimation の完了時の event で呼ぶ method
     public void OnFadeOutComplete()
     {
         onStartMenuFadeComplete.Invoke(true, loadSceneName);
+        OnFadeProcessing = false;
     }
     public void OnFadeInComplete()
     {
@@ -87,5 +91,11 @@ public class StartMenu : MonoBehaviour
         SkyBoxManager.Instance.ChangeEveningSky();
         UIManager.Instance.SetDummyCameraActive(false);
         SpawnManager.Instance.RetrunGeneratedPrefab();
+    }
+
+    // StartScen が読み込まれる時の、FadOutAnimation が完了した時に行う処理
+    void OnFadeOutCompleteOfFirstStartScene()
+    {
+        OnFadeProcessing = false;
     }
 }

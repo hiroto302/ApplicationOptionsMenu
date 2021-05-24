@@ -23,6 +23,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     public Events.EventLoadFadeComplete OnStartMenuFadeComplete;   // StartMenuのFadeが完了時発生する event
 
+
     private bool _isDarkmode = true;  // UI を Darkmode で表示するか
     public bool IsDarkmode
     {
@@ -50,7 +51,7 @@ public class UIManager : MonoSingleton<UIManager>
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) &&  GameManager.Instance.CurrentGameState == GameManager.GameState.PREGAME)
+        if(Input.GetKeyDown(KeyCode.Space) &&  GameManager.Instance.CurrentGameState == GameManager.GameState.PREGAME && !_startMenu.OnFadeProcessing)
         {
             _startMenu.StartGame();
         }
