@@ -176,7 +176,6 @@ public class GameManager : MonoSingleton<GameManager>
     public void RestartGame()
     {
         UpdateState(GameState.PREGAME);     // PREGAMEに戻った時の処理を各クラスに実装する
-        Debug.Log("RestartGame !!");
     }
 
     // implement features for quitting

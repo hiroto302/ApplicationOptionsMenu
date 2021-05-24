@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 // 音を管理するシステムクラス
 public class SoundManager : MonoSingleton<SoundManager>
@@ -14,6 +15,8 @@ public class SoundManager : MonoSingleton<SoundManager>
     public Events.EventSEValue OnSEVolumeChange;      // SE の音量が変更された時の event
     private Coroutine fadeBGMVolumeCoroutine;
     private Coroutine fadeSEVolumeCoroutine;
+
+    private Action ExecuteWait;
 
     public float InitialBGMVolume
     {
@@ -69,16 +72,59 @@ public class SoundManager : MonoSingleton<SoundManager>
     // 音 Fade In : 音を徐々に大きくする
     public void FadeInBGMVolume(float volume, float second)
     {
-        fadeBGMVolumeCoroutine = StartCoroutine(FadeInBGMVolumeCoroutine(volume, second));
+        // fadeBGmVolumeが参照されている場合待機状態, Nullになったら(FadeOut処理が終了したら)FadeIn処理を開始
+        if(fadeBGMVolumeCoroutine != null)
+        {
+            // 処理を実行するまで待機状態
+            StartCoroutine(FadeInBGMVolumeExecutionWaitingRoutine(volume, second));
+        }
+        else
+        {
+            fadeBGMVolumeCoroutine = StartCoroutine(FadeInBGMVolumeCoroutine(volume, second));
+        }
     }
+
+    IEnumerator FadeInBGMVolumeExecutionWaitingRoutine(float volume, float second)
+    {
+        while(fadeBGMVolumeCoroutine != null)
+        {
+            // 待機状態
+            yield return null;
+        }
+        // FadeOutの処理が完了した後実行
+        fadeBGMVolumeCoroutine = StartCoroutine(FadeInBGMVolumeCoroutine(volume, second));
+        // 待機処理の終了
+        StopCoroutine(FadeInBGMVolumeExecutionWaitingRoutine(volume, second));
+    }
+
+
     public void FadeOutSEVolume(float second)
     {
         initialSEVolume = SettingSEVolume;
         fadeSEVolumeCoroutine = StartCoroutine(FadeOutSEVolumeCoroutine(SettingSEVolume, second));
     }
+
     public void FadeInSEVolume(float second)
     {
-        fadeSEVolumeCoroutine = StartCoroutine(FadeInSEVolumeCoroutine(initialSEVolume, second));
+        if(fadeSEVolumeCoroutine != null)
+        {
+            // 処理を実行するまで待機状態
+            StartCoroutine(FadeInSEVolumeExecutionWaitingRoutine(initialSEVolume ,second));
+        }
+        else
+        {
+            fadeSEVolumeCoroutine = StartCoroutine(FadeInSEVolumeCoroutine(initialSEVolume ,second));
+        }
+    }
+
+    IEnumerator FadeInSEVolumeExecutionWaitingRoutine(float volume, float second)
+    {
+        while(fadeSEVolumeCoroutine != null)
+        {
+            yield return null;
+        }
+        fadeSEVolumeCoroutine = StartCoroutine(FadeInSEVolumeCoroutine(volume, second));
+        StopCoroutine(FadeInSEVolumeExecutionWaitingRoutine(volume, second));
     }
 
     // initialVolume を 0 にする (initialVolume には 現在各オブジェクトに適用されてる音量 SettingBGMVolume が代入する)
@@ -95,7 +141,6 @@ public class SoundManager : MonoSingleton<SoundManager>
                 break;
             }
             yield return new WaitForSeconds(waitForSecond);  // 0.1秒毎に処理を繰り返す
-            Debug.Log(elapsedTime);
             // fadedVolume : フェードした後の音量
             float fadedVolume = initialVolume - fadeOutRate * elapsedTime;
             ChangeBGMVolume(fadedVolume);                    // 減少した音に設定値を変更
