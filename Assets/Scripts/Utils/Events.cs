@@ -11,6 +11,7 @@ public class Events
 
     // BGMの音量が変更された時発生する event
     [System.Serializable] public class EventBGMValue : UnityEvent<float>{};
+
     // SEの音量が変更された時発生する event
     [System.Serializable] public class EventSEValue : UnityEvent<float>{};
 
@@ -22,4 +23,7 @@ public class Events
     [System.Serializable] public class EventDarkMode : UnityEvent<bool>{};
     // SpawnManeger に 特定のPrefab を生成すること要求した時に発生する event
     [System.Serializable] public class EventGeneratePrefab : UnityEvent<int>{};
+
+    // DataManager に Dataが保存されいる時、その内容を他のクラスに反映する時に発生する event
+    [System.Serializable] public class EventLoadSaveData : UnityEvent{};
 }

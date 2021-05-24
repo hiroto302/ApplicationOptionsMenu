@@ -21,10 +21,9 @@ public class SettingMenu : MonoBehaviour
     // 再度初期値に戻すために初期値をシステムクラスから得て変更する
     void OnEnable()
     {
-        // InitializeSettings();
-        // やっぱり初期化のevent作成していいかも
         if(InitializeSettings != null)
         {
+            // 初期処理を行う event 実行
             InitializeSettings();
         }
     }
@@ -41,11 +40,7 @@ public class SettingMenu : MonoBehaviour
         SoundManager.Instance.ChangeSEVolume(_seVolumeSlider.SEVolume);     // SEVolume 設定変更
         UIManager.Instance.IsDarkmode =  _darkmodeToggle.darkmode;          // Darkmode 設定変更
         UIManager.Instance.ChangeLanguageType(_languageSelectionDropdown.SelectedLanguageType()); // 表示言語 設定変更
-    }
 
-    // SettingMenuの 初期化
-    // void InitializeSettings()
-    // {
-        // _bgmVolumeSlider.gameObject.GetComponent<Slider>().value = SoundManager.Instance.SettingBGMVolume;
-    // }
+        DataManager.Instance.SaveSettingMenuData();     // 変更された内容を保存
+    }
 }

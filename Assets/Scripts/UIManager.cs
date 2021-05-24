@@ -42,6 +42,9 @@ public class UIManager : MonoSingleton<UIManager>
     {
         GameManager.Instance.OnGameStateChange.AddListener(HandleGameStateChange);
         _startMenu.onStartMenuFadeComplete.AddListener(HandleStartMenuFadeComplete);
+
+        // 初期化処理
+        // UpdateLanguageType(CurrentLanguageType);
     }
 
     void Update()

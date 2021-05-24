@@ -18,11 +18,22 @@ public class SoundManager : MonoSingleton<SoundManager>
     public float InitialBGMVolume
     {
         get { return  initialBGMVolume; }
+        set { initialBGMVolume = value; }
     }
+    public float InitialSEVolume
+    {
+        get { return  initialSEVolume; }
+        set { initialSEVolume = value; }
+    }
+
 
     protected override void Awake()
     {
         base.Awake();
+    }
+
+    void Start()
+    {
         SettingBGMVolume = initialBGMVolume;
         SettingSEVolume = initialSEVolume;
         FadeInBGMVolume(initialBGMVolume, 3.0f);      // 音をfadeInさせながら初期シーン開始
