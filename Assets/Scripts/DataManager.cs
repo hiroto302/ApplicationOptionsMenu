@@ -9,32 +9,14 @@ public class DataManager : MonoSingleton<DataManager>
     // Awake の次に実行される関数
     void OnEnable()
     {
-        // データ内容を更新
+        // データ内容を保存されてるデータに更新
         SetSettingMenuSaveData();
     }
 
     void OnDisable()
     {
-        /* このタイミングで呼ぶと他のクラスの情報を参照することができない可能性があるので
+        /* SaveSettingMenuData()をこのタイミングで実行すると、他のクラスの情報を参照することができない可能性があるので
             SaveButtonが押されたタイミングで内容を保存したいDataを反映させる */
-        // SaveSettingMenuData();
-    }
-
-    void Update()
-    {
-        // Debug用
-        if(Input.GetKeyDown(KeyCode.S))
-        {
-            SaveSettingMenuData();
-        }
-
-        // 保存されてるDataをロードし、他のクラスに内容を反映
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            _settingMenuSaveData.LoadSettingMenuData();
-            SetSettingMenuSaveData();
-            Debug.Log("Load");
-        }
     }
 
     // 設定されてる内容の保存
@@ -48,14 +30,12 @@ public class DataManager : MonoSingleton<DataManager>
 
         // Data の保存
         _settingMenuSaveData.SaveSettingMenuData(bgmVolume, seVolume, isDarkmode, languageType);
-        Debug.Log("Save");
     }
 
-    // 保存されていた SettingMenu の Data を各クラスに代入
+    // 保存されている SettingMenu の Data を各クラスに代入
     void SetSettingMenuSaveData()
     {
-        //  Dataが保存されてる時, event で各 manager クラスに知らせる or 直接値を代入する
-        //  とりあえず、値を代入していく
+        //  Dataが保存されてる時, event で各 manager クラスに知らせる or 直接値を代入する. 今回は値を代入
         if(_settingMenuSaveData.key != "")
         {
             SoundManager.Instance.InitialBGMVolume = _settingMenuSaveData.BGMVolume;

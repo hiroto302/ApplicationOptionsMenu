@@ -24,8 +24,7 @@ public class SkyBoxManager : MonoSingleton<SkyBoxManager>
         // MainScene => StartScene
         if(previousState == GameManager.GameState.PAUSED && currentState == GameManager.GameState.PREGAME)
         {
-            // Start Menu が FadeIn 完了した時点で変える
-            // ChangeSkyBoxMaterial(_eveningSky);
+            // Start Menu が FadeIn 完了した時、 ChangeEveningSky を実行する
         }
     }
     void ChangeSkyBoxMaterial(Material skyMaterial)

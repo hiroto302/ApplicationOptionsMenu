@@ -52,20 +52,8 @@ public class GameManager : MonoSingleton<GameManager>
         UIManager.Instance.OnStartMenuFadeComplete.AddListener(HandleStartMenuFadeComplete);  // Fade処理が完了時の処理
 
         // コールバックシステムにより１秒後に次のシーンをロード開始(システムクラスの初期化処理を完了させてからロードできるようにするため)
-        // または、初めてStartシーンをロードした時のイベント作成するか
-        // LoadScene("Start");
         CallBackLoadMethod = LoadScene;
         StartCoroutine(CallBackRoutineForLoadFirsitScene(CallBackLoadMethod, "Start"));
-    }
-
-    public IEnumerator CallBackRoutineForLoadFirsitScene(Action<string> onComplete, string sceneName)
-    {
-        yield return new WaitForSeconds(0.1f);
-        if(onComplete != null)
-        {
-            onComplete(sceneName);
-            OnFirstSceneLoad.Invoke();
-        }
     }
 
     void Update()
@@ -73,6 +61,17 @@ public class GameManager : MonoSingleton<GameManager>
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePause();
+        }
+    }
+
+    // ロード処理を、0.1秒後に行うコールバック処理
+    public IEnumerator CallBackRoutineForLoadFirsitScene(Action<string> onComplete, string sceneName)
+    {
+        yield return new WaitForSeconds(0.1f);
+        if(onComplete != null)
+        {
+            onComplete(sceneName);
+            OnFirstSceneLoad.Invoke();
         }
     }
 
@@ -136,7 +135,6 @@ public class GameManager : MonoSingleton<GameManager>
     // シーンのアンロード完了時時に行う処理
     void OnUnloadOperationComplete(AsyncOperation ao)
     {
-        // Debug.Log("_loadOperations.Count : " +  _loadOperations.Count);
     }
 
     public void LoadScene(string seceneName)
@@ -190,7 +188,6 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-
     // 最初の画面(ここでは、Start Scene)に戻って再スタート
     public void RestartGame()
     {
@@ -203,6 +200,7 @@ public class GameManager : MonoSingleton<GameManager>
         Application.Quit();
     }
 
+    // GameManagerを削除される時、他のシステムクラスを削除し、参照をなくす
     protected override void OnDestroy()
     {
         base.OnDestroy();

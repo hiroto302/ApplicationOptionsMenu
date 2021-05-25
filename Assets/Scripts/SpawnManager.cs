@@ -5,8 +5,6 @@ using UnityEngine;
 // シーン上に生成する Object を管理するシステムクラス
 public class SpawnManager : MonoSingleton<SpawnManager>
 {
-    // [SerializeField] GameObject[] _prefabs;
-
     [SerializeField] SpawnUnitychanManager _spawnUnitychanManager;
     [SerializeField] SpawnFairyManager _spawnFairyManager;
 

@@ -19,12 +19,11 @@ public class SpawnUnitychanManager : MonoBehaviour
     // event が発生した時の処理
     void HandleUnitychanGenerate(int amountOfPrefabs)
     {
-        // SpawnUnitychan(new Vector3(-0.28f, 0, -0.471f));
         SpawnUnitychan(new Vector3(-0.28f, 0, 0));
     }
 
 
-    // Unitychan の Instance化
+    // Unitychan を Instance化
     void GenerateUnitychan()
     {
         SpawnManager.Instance.GeneratePrefab(_unityChanPrefab, 1, _unityChanContainer, _unityChanPool);
@@ -54,6 +53,4 @@ public class SpawnUnitychanManager : MonoBehaviour
             }
         }
     }
-
-
 }

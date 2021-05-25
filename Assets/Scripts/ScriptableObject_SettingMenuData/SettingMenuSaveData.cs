@@ -7,7 +7,7 @@ public class SettingMenuSaveData : ScriptableObject
 {
     [Header("Stats")]
     // 保存したいデータ
-    // BGMの音量    BGMVolume = SoundManager.Instance.SettingBGMVolume = InitialSettingBGMVolume
+    // BGMの音量
     public float BGMVolume;
     // SEの音量
     public float SEVolume;
@@ -23,12 +23,6 @@ public class SettingMenuSaveData : ScriptableObject
     void OnEnable()
     {
         LoadSettingMenuData();
-    }
-
-    // アプリの終了時更新されてる Data を Save(保存)
-    void OnDisable()
-    {
-        // SaveSettingMenuData();
     }
 
     // SettingMenu の Data を保存

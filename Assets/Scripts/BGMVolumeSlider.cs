@@ -30,6 +30,8 @@ public class BGMVolumeSlider : MonoBehaviour
         int percentageValue =  Mathf.FloorToInt(value * 100.0f);
         return percentageValue;
     }
+
+    // 初期化処理
     void InitializeSetting()
     {
         BGMVolume = SoundManager.Instance.SettingBGMVolume;

@@ -11,6 +11,7 @@ public class UIManager : MonoSingleton<UIManager>
         English,
         Japanese
     }
+
     [SerializeField] private StartMenu _startMenu;
     [SerializeField] private SettingButton _settingButton;
     [SerializeField] private SettingMenu _settingMenu;
@@ -18,10 +19,9 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField] private Camera _dummyCamera;
 
     public LanguageType CurrentLanguageType = LanguageType.English;  // 現在の言語
-    public Events.EventDarkMode OnDarkmodeChange;            // Darkmode が変更される時に発生する event
-    public Events.EventLanguageType OnLanguageTypeChange;           // LanguageType が変更される時に発生する event
-
-    public Events.EventLoadFadeComplete OnStartMenuFadeComplete;   // StartMenuのFadeが完了時発生する event
+    public Events.EventDarkMode OnDarkmodeChange;                    // Darkmode が変更される時に発生する event
+    public Events.EventLanguageType OnLanguageTypeChange;            // LanguageType が変更される時に発生する event
+    public Events.EventLoadFadeComplete OnStartMenuFadeComplete;     // StartMenuのFadeが完了時発生する event
 
 
     private bool _isDarkmode = true;  // UI を Darkmode で表示するか
@@ -44,9 +44,6 @@ public class UIManager : MonoSingleton<UIManager>
         GameManager.Instance.OnGameStateChange.AddListener(HandleGameStateChange);
         _startMenu.onStartMenuFadeComplete.AddListener(HandleStartMenuFadeComplete);
         GameManager.Instance.OnFirstSceneLoad.AddListener(HandleFirstSceneLoad);
-        // 下記の処理は最初のシーンがロード完了後に行う
-        // _startMenu.gameObject.SetActive(true);
-        // SetDummyCameraActive(false);
     }
 
     void Update()
@@ -57,10 +54,11 @@ public class UIManager : MonoSingleton<UIManager>
         }
     }
 
-    // 初のシーンをロードする時に実行する処理
+    // 最初のシーンがロード完了後に実行する処理
     void HandleFirstSceneLoad()
     {
         _startMenu.gameObject.SetActive(true);
+        // SetDummyCameraActive(false);             ダミーカメラの切り替えはStartMenu の Animation Eventで実行する
     }
 
     void HandleGameStateChange(GameManager.GameState currentState, GameManager.GameState previousState)
@@ -74,7 +72,6 @@ public class UIManager : MonoSingleton<UIManager>
         if(previousState == GameManager.GameState.PAUSED && currentState == GameManager.GameState.PREGAME)
         {
             SettingButtonSetActive(false);
-            // StartMenuSetActive(true);
             _startMenu.RestartGame();
         }
         // ポーズメニューの表示・非表示
@@ -102,8 +99,8 @@ public class UIManager : MonoSingleton<UIManager>
         _pauseMenu.gameObject.SetActive(show);
     }
 
-    // ここのメソッドだけSettingMenuに対応した書きかたになってるからあかん
-    // SettingMenuButtonの方の記述を変えて上記２つと同じ記述でも動作するように変更する
+    // ここのメソッドだけSettingMenuに対応した書きかたになっている
+    // SettingMenuButtonの方の記述を変えて動作するようにすることを検討すること
     public void SettingMenuSetActive(bool show)
     {
         if(!_settingMenu.gameObject.activeSelf)
@@ -114,6 +111,12 @@ public class UIManager : MonoSingleton<UIManager>
         {
             _settingMenu.gameObject.SetActive(!show);
         }
+    }
+
+    // DummyCamera の表示・非表示
+    public void SetDummyCameraActive(bool active)
+    {
+        _dummyCamera.gameObject.SetActive(active);
     }
 
 
@@ -167,11 +170,5 @@ public class UIManager : MonoSingleton<UIManager>
     public void ChangeLanguageType(LanguageType type)
     {
         UpdateLanguageType(type);
-    }
-
-    // DummyCamera の表示・非表示
-    public void SetDummyCameraActive(bool active)
-    {
-        _dummyCamera.gameObject.SetActive(active);
     }
 }

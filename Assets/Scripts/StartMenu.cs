@@ -8,10 +8,9 @@ public class StartMenu : MonoBehaviour
 
     public Events.EventLoadFadeComplete onStartMenuFadeComplete;    // Fade が完了した時の Event
 
-    private string loadSceneName;  // ロード先にシーン名
+    private string loadSceneName;              // ロード先のシーン名
 
     public bool OnFadeProcessing = true;       // Fade処理している最中であるか
-
 
     void Start()
     {
@@ -27,12 +26,6 @@ public class StartMenu : MonoBehaviour
             FadeOut();
             SoundManager.Instance.FadeInBGMVolume(SoundManager.Instance.InitialBGMVolume, 3.0f);
             SoundManager.Instance.FadeInSEVolume(3.0f);
-        }
-        // PAUSED => PREGAME (Restart ボタンが押された時の処理)
-        if(previousState == GameManager.GameState.PAUSED && currentState == GameManager.GameState.PREGAME)
-        {
-            // RestartGame();
-            // Debug.Log("StartMenu RestartGame");
         }
     }
 
@@ -64,7 +57,7 @@ public class StartMenu : MonoBehaviour
         OnFadeProcessing = true;
     }
 
-    // FadeAnimation の完了時の event で呼ぶ method
+    // FadeAnimation の完了時の event で実行する method
     public void OnFadeOutComplete()
     {
         onStartMenuFadeComplete.Invoke(true, loadSceneName);
@@ -94,12 +87,12 @@ public class StartMenu : MonoBehaviour
     }
 
     // 初めて StartScen が読み込まれる時の、FadOutAnimation が始まる時時に行う処理
-    void OnFadeOutStartOfFirstStartScene()
+    void OnFadeOutStartFirstStartScene()
     {
         UIManager.Instance.SetDummyCameraActive(false);
     }
     // 初めて StartScen が読み込まれる時の、FadOutAnimation が完了した時に行う処理
-    void OnFadeOutCompleteOfFirstStartScene()
+    void OnFadeOutCompleteFirstStartScene()
     {
         OnFadeProcessing = false;
     }

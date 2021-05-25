@@ -50,6 +50,7 @@ public class SpawnFairyManager : MonoBehaviour
         return new Vector3(Random.Range(-5.0f, 5.0f), Random.Range(0.5f, 2.5f), Random.Range(2f, 3f));
     }
 
+    // 出現させた Fairy を戻す
     public void ReturnFairy()
     {
         foreach(var fairy in _fairyPool)

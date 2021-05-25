@@ -41,15 +41,11 @@ public class SoundManager : MonoSingleton<SoundManager>
         SettingSEVolume = initialSEVolume;
 
         GameManager.Instance.OnFirstSceneLoad.AddListener(HandleFirstSceneLoad);
-
-        // 下記の処理は最初のシーンがロード完了後に行う
-        // FadeInBGMVolume(initialBGMVolume, 3.0f);      // 音をfadeInさせながら初期シーン開始
-        // FadeInSEVolume(3.0f);
     }
 
+    // 最初のシーンがロード完了後に行う処理
     void HandleFirstSceneLoad()
     {
-        // 下記の処理は最初のシーンがロード完了後に行う
         FadeInBGMVolume(initialBGMVolume, 3.0f);      // 音をfadeInさせながら初期シーン開始
         FadeInSEVolume(3.0f);
     }
@@ -57,7 +53,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     /*下記にしるすように、毎回音量の値が変わった時、
         このシステムクラスが他の音量を扱う全てのオブジェクトを取得する必要はない
         値が変わったとき、発生する event を作り、
-        その event が 発生した時に全て BGM クラスが知らせを受けて各自の音量を変えるように実装した */
+        その event が 発生した時に全て BGM クラスが知らせを受けて各自の音量を変えるように実装 */
     public void ChangeBGMVolume(float volume)
     {
         SettingBGMVolume = volume;
@@ -66,7 +62,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     public void ChangeSEVolume(float volume)
     {
         SettingSEVolume = volume;
-        OnSEVolumeChange.Invoke(SettingSEVolume);   // 値が変更された時, SE の音量を変更する event 発生
+        OnSEVolumeChange.Invoke(SettingSEVolume);    // 値が変更された時, SE の音量を変更する event 発生
     }
 
     // 処理のリファクタリングを検討すること
