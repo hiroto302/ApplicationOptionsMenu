@@ -93,7 +93,12 @@ public class StartMenu : MonoBehaviour
         SpawnManager.Instance.RetrunGeneratedPrefab();
     }
 
-    // StartScen が読み込まれる時の、FadOutAnimation が完了した時に行う処理
+    // 初めて StartScen が読み込まれる時の、FadOutAnimation が始まる時時に行う処理
+    void OnFadeOutStartOfFirstStartScene()
+    {
+        UIManager.Instance.SetDummyCameraActive(false);
+    }
+    // 初めて StartScen が読み込まれる時の、FadOutAnimation が完了した時に行う処理
     void OnFadeOutCompleteOfFirstStartScene()
     {
         OnFadeProcessing = false;

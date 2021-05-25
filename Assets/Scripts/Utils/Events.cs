@@ -26,4 +26,6 @@ public class Events
 
     // DataManager に Dataが保存されいる時、その内容を他のクラスに反映する時に発生する event
     [System.Serializable] public class EventLoadSaveData : UnityEvent{};
+    // GameManagerが Boot Scene から 移行する最初のシーン(Start Scene) をロードする時に発生する event
+    [System.Serializable] public class EventFirstLoadScene : UnityEvent{};
 }

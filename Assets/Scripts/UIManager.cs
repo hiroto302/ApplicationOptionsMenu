@@ -41,12 +41,12 @@ public class UIManager : MonoSingleton<UIManager>
 
     void Start()
     {
-        _startMenu.gameObject.SetActive(true);
         GameManager.Instance.OnGameStateChange.AddListener(HandleGameStateChange);
         _startMenu.onStartMenuFadeComplete.AddListener(HandleStartMenuFadeComplete);
-
-        // 初期化処理
-        // UpdateLanguageType(CurrentLanguageType);
+        GameManager.Instance.OnFirstSceneLoad.AddListener(HandleFirstSceneLoad);
+        // 下記の処理は最初のシーンがロード完了後に行う
+        // _startMenu.gameObject.SetActive(true);
+        // SetDummyCameraActive(false);
     }
 
     void Update()
@@ -55,6 +55,12 @@ public class UIManager : MonoSingleton<UIManager>
         {
             _startMenu.StartGame();
         }
+    }
+
+    // 初のシーンをロードする時に実行する処理
+    void HandleFirstSceneLoad()
+    {
+        _startMenu.gameObject.SetActive(true);
     }
 
     void HandleGameStateChange(GameManager.GameState currentState, GameManager.GameState previousState)

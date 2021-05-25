@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 // 最初にロードされる Boot Scene にてインスタンス化し、ゲーム全体を管理するために存在させ続ける
 public class GameManager : MonoSingleton<GameManager>
@@ -20,8 +21,12 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField] private GameState _currentGameState = GameState.PREGAME;    // 現在のゲームの状態
     private List<AsyncOperation> _loadOperations;           // ロード時に行う AsyncOperation を格納
     public Events.EventGamState OnGameStateChange;          // GameState が変わる時発生する event
+    public Events.EventFirstLoadScene OnFirstSceneLoad;     // 初めてシーンをロードする時に発生するイベント
+    public Action<string> CallBackLoadMethod;               // メソッドの遅らせて実行する時に利用する Action
+
 
     public int LoadedManiSceneCount;                        // メインシーンをロードした回数
+
 
     public GameState CurrentGameState
     {
@@ -41,12 +46,26 @@ public class GameManager : MonoSingleton<GameManager>
         _instancedSystemPrefabs = new List<GameObject>();
         _loadOperations = new List<AsyncOperation>();
 
-
         DontDestroyOnLoad(this.gameObject); // GameManagerの常駐化
         InstantiateSystemPrefabs();
-        LoadScene("Start");
 
         UIManager.Instance.OnStartMenuFadeComplete.AddListener(HandleStartMenuFadeComplete);  // Fade処理が完了時の処理
+
+        // コールバックシステムにより１秒後に次のシーンをロード開始(システムクラスの初期化処理を完了させてからロードできるようにするため)
+        // または、初めてStartシーンをロードした時のイベント作成するか
+        // LoadScene("Start");
+        CallBackLoadMethod = LoadScene;
+        StartCoroutine(CallBackRoutineForLoadFirsitScene(CallBackLoadMethod, "Start"));
+    }
+
+    public IEnumerator CallBackRoutineForLoadFirsitScene(Action<string> onComplete, string sceneName)
+    {
+        yield return new WaitForSeconds(0.1f);
+        if(onComplete != null)
+        {
+            onComplete(sceneName);
+            OnFirstSceneLoad.Invoke();
+        }
     }
 
     void Update()

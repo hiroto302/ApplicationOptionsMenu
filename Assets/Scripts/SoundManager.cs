@@ -39,6 +39,17 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         SettingBGMVolume = initialBGMVolume;
         SettingSEVolume = initialSEVolume;
+
+        GameManager.Instance.OnFirstSceneLoad.AddListener(HandleFirstSceneLoad);
+
+        // 下記の処理は最初のシーンがロード完了後に行う
+        // FadeInBGMVolume(initialBGMVolume, 3.0f);      // 音をfadeInさせながら初期シーン開始
+        // FadeInSEVolume(3.0f);
+    }
+
+    void HandleFirstSceneLoad()
+    {
+        // 下記の処理は最初のシーンがロード完了後に行う
         FadeInBGMVolume(initialBGMVolume, 3.0f);      // 音をfadeInさせながら初期シーン開始
         FadeInSEVolume(3.0f);
     }
